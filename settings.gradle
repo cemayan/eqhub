@@ -1,0 +1,6 @@
+rootProject.name = 'eqhub'
+include('auth-server')
+include 'common'
+include 'post-service'
+include 'login-service'
+
