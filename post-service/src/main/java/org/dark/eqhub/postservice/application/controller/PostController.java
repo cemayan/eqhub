@@ -1,7 +1,6 @@
 package org.dark.eqhub.postservice.application.controller;
 
 
-
 import model.Response;
 import org.dark.eqhub.postservice.application.constants.Constants;
 import org.dark.eqhub.postservice.domain.model.Post;
@@ -19,6 +18,12 @@ public class PostController {
 
     public PostController(PostUsecase postUsecase) {
         this.postUsecase = postUsecase;
+    }
+
+
+    @GetMapping("/")
+    public Mono<String[]> get() {
+        return Mono.just(new String[]{"test", "test2"});
     }
 
     @PostMapping(Constants.POST_CONTROLLER_POST_PREFIX)

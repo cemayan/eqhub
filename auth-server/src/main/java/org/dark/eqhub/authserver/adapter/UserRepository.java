@@ -1,5 +1,6 @@
 package org.dark.eqhub.authserver.adapter;
 
+
 import org.dark.eqhub.authserver.domain.model.EqhubUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 

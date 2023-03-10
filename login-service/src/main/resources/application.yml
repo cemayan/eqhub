@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          login-client-oidc:
+            provider: spring
+            client-id: login-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid, profile
+            client-name: login-client-oidc
+          login-client-authorization-code:
+            provider: spring
+            client-id: login-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/authorized"
+            scope: eqhub.read,eqhub.write
+            client-name: login-client-authorization-code
+          login-client-client-credentials:
+            provider: spring
+            client-id: login-client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: eqhub.read,eqhub.write
+            client-name: login-client-client-credentials
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
+
+post-service:
+  base-uri: http://127.0.0.1:8085/api/v1/post/

@@ -1,6 +1,11 @@
-
-
 spring:
+  main:
+    web-application-type: reactive
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
   webflux:
     base-path: '/api'
   data:
@@ -8,11 +13,6 @@ spring:
       host: localhost
       port: 27017
       database: eqhub
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9000
-          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
 server:
   port: 8085

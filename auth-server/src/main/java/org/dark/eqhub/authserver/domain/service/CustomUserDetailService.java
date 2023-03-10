@@ -1,5 +1,4 @@
-package org.dark.eqhub.authserver;
-
+package org.dark.eqhub.authserver.domain.service;
 
 import org.dark.eqhub.authserver.adapter.UserRepository;
 import org.dark.eqhub.authserver.domain.model.EqhubUser;
@@ -15,7 +14,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
 
 
     @Override
