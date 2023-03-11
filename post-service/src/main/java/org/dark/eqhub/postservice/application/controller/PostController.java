@@ -1,7 +1,8 @@
 package org.dark.eqhub.postservice.application.controller;
 
 
-import model.Response;
+
+import org.dark.eqhub.common.model.Response;
 import org.dark.eqhub.postservice.application.constants.Constants;
 import org.dark.eqhub.postservice.domain.model.Post;
 import org.dark.eqhub.postservice.domain.port.input.PostUsecase;
