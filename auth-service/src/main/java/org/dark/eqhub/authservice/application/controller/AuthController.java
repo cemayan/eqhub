@@ -34,8 +34,8 @@ public class AuthController {
         this.users = users;
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<Response> signin(@RequestBody AuthRequest data) {
+    @PostMapping("/login")
+    public ResponseEntity<Response> login(@RequestBody AuthRequest data) {
 
         try {
             String username = data.getUsername();

@@ -11,21 +11,24 @@ sourceCompatibility = '17'
 repositories {
     mavenCentral()
 }
+
+//
 //bootJar {
-//    enabled = false
+//    enabled = true
 //}
 //
 //jar {
 //    enabled = true
 //}
-//
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation 'org.postgresql:postgresql'
-    implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation project(path: ':common')
+    implementation project(':common')
+    implementation project(':proto')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE'
+    implementation 'org.neo4j.springframework.data:spring-data-neo4j-rx-spring-boot-starter:1.1.1'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

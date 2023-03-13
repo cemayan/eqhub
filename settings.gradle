@@ -4,4 +4,6 @@ include 'common'
 include 'post-service'
 include 'login-service'
 include 'auth-service'
+include 'friends-service'
+include 'proto'
 

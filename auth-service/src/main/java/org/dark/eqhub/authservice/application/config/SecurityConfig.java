@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(c -> c.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/signin").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtTokenAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
@@ -58,6 +58,7 @@ public class SecurityConfig {
             String username = authentication.getPrincipal() + "";
             String password = authentication.getCredentials() + "";
 
+
             UserDetails user = userDetailsService.loadUserByUsername(username);
 
             if (!passwordEncoder.matches(password, user.getPassword())) {
@@ -67,8 +68,12 @@ public class SecurityConfig {
             if (!user.isEnabled()) {
                 throw new DisabledException("User account is not active");
             }
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
 
-            return new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+            usernamePasswordAuthenticationToken.setDetails(user.getPassword());
+
+
+            return usernamePasswordAuthenticationToken;
         };
     }
 

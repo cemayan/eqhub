@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.joining;
 
@@ -77,13 +78,24 @@ public class JwtTokenProvider {
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
+
+    public Optional<Claims> getClaims(String token) {
+        try {
+            Jws<Claims> claims = Jwts
+                    .parserBuilder().setSigningKey(this.secretKey).build()
+                    .parseClaimsJws(token);
+            return Optional.of(claims.getBody());
+        } catch (JwtException | IllegalArgumentException e) {
+            logger.error("Invalid JWT token: {}", e.getMessage());
+        }
+        return Optional.empty();
+    }
+
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts
                     .parserBuilder().setSigningKey(this.secretKey).build()
                     .parseClaimsJws(token);
-            //  parseClaimsJws will check expiration date. No need do here.
-            logger.info("expiration date: {}", claims.getBody().getExpiration());
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());

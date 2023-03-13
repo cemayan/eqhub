@@ -17,3 +17,12 @@ eqhub:
   auth:
     secret: __secretkey&&__secretkey%%__secretkey//__
     exp:  3600000
+
+
+grpc:
+  client:
+    local-grpc-server:
+      address: 'static://127.0.0.1:9898'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext

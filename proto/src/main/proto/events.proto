@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package org.dark.eqhub.proto;
+
+option java_multiple_files = true;
+option java_package = "org.dark.eqhub.proto";
+option java_outer_classname = "EventProto";
+
+message Event {
+  string  aggregate_id = 1;
+  string aggregate_type = 2;
+  bytes event_data = 3;
+  int64 event_date = 4;
+  string event_name = 5;
+  int64 user_id = 6;
+  int64 game_id = 7;
+}
+
+message Response {
+  string message = 1;
+  bytes data = 2;
+  int32  statusCode = 3;
+}
+
+service EventgRPCService {
+  rpc SendEvent(Event) returns (Event) {}
+}
