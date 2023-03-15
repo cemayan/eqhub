@@ -24,8 +24,8 @@ repositories {
 dependencies {
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
-   // implementation "io.projectreactor:reactor-core:3.5.3"
-   // implementation "com.salesforce.servicelibs:reactor-grpc-stub:${reactiveGrpcVersion}"
+    implementation "io.projectreactor:reactor-core:3.5.3"
+    implementation "com.salesforce.servicelibs:reactor-grpc-stub:${reactiveGrpcVersion}"
     compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
@@ -43,14 +43,14 @@ protobuf {
         grpc {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
-//        reactor {
-//            artifact = "com.salesforce.servicelibs:reactor-grpc:${reactiveGrpcVersion}"
-//        }
+        reactor {
+            artifact = "com.salesforce.servicelibs:reactor-grpc:${reactiveGrpcVersion}"
+        }
     }
     generateProtoTasks {
         all()*.plugins {
             grpc {}
-            //reactor {}
+            reactor {}
         }
     }
 }

@@ -23,5 +23,5 @@ message Response {
 }
 
 service EventgRPCService {
-  rpc SendEvent(Event) returns (Event) {}
+  rpc SendEvent(Event) returns (stream Event) {}
 }

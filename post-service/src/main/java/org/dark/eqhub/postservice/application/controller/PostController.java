@@ -31,8 +31,8 @@ public class PostController {
 
 
     @GetMapping("/test")
-    public String printMessage(@RequestParam(defaultValue = "Michael") String name) {
-        return eventsGrpcService.receiveGreeting(name);
+    public void sendEvent() {
+         eventsGrpcService.sendEvent();
     }
 
 
