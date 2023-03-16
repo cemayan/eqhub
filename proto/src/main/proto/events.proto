@@ -12,8 +12,7 @@ message Event {
   bytes event_data = 3;
   int64 event_date = 4;
   string event_name = 5;
-  int64 user_id = 6;
-  int64 game_id = 7;
+  string user_name = 6;
 }
 
 message Response {

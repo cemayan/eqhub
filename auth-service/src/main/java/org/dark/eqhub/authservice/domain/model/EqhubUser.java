@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",indexes = @Index(name = "username_idx", columnList = "userName"))
 public class EqhubUser {
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class EqhubUser {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String userName;
 
     @Column(nullable = false, unique = true)

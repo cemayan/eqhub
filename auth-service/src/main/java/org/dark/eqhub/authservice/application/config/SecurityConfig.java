@@ -73,6 +73,7 @@ public class SecurityConfig {
             usernamePasswordAuthenticationToken.setDetails(user.getPassword());
 
 
+
             return usernamePasswordAuthenticationToken;
         };
     }

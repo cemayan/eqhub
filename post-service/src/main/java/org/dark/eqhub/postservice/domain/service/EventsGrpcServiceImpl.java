@@ -1,8 +1,13 @@
 package org.dark.eqhub.postservice.domain.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.dark.eqhub.common.Constants;
+import org.dark.eqhub.common.util.Utils;
 import org.dark.eqhub.proto.Event;
 import org.dark.eqhub.proto.ReactorEventgRPCServiceGrpc;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,13 +17,26 @@ import reactor.core.publisher.Mono;
 public class EventsGrpcServiceImpl {
 
     private final ReactorEventgRPCServiceGrpc.ReactorEventgRPCServiceStub reactorEventgRPCServiceStub;
+    private final ObjectMapper objectMapper;
 
-    public EventsGrpcServiceImpl(ReactorEventgRPCServiceGrpc.ReactorEventgRPCServiceStub reactorEventgRPCServiceStub) {
+    public EventsGrpcServiceImpl(ReactorEventgRPCServiceGrpc.ReactorEventgRPCServiceStub reactorEventgRPCServiceStub, ObjectMapper objectMapper) {
         this.reactorEventgRPCServiceStub = reactorEventgRPCServiceStub;
+        this.objectMapper = objectMapper;
     }
 
     public void sendEvent() {
-        Flux<Event> eventFlux = reactorEventgRPCServiceStub.sendEvent(Mono.just(Event.newBuilder().setAggregateId("test").build()));
+
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Mono<Event> eventMono = Mono.just(
+                Event
+                        .newBuilder()
+                        .setAggregateId(Utils.GetUUID())
+                        .setEventDate(Utils.GetDate())
+                        .setEventName(Constants.GET_FRIEND)
+                        .setUserName(principal.getUsername())
+                        .build());
+        Flux<Event> eventFlux = reactorEventgRPCServiceStub.sendEvent(eventMono);
         eventFlux.parallel().subscribe();
     }
 
