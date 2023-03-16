@@ -11,6 +11,8 @@ import java.io.IOException;
 @Configuration
 public class EqGrpcConfiguration {
 
+
+
     @PostConstruct
     public  void startGrpcServer() {
         Server server = ServerBuilder.forPort(9898)

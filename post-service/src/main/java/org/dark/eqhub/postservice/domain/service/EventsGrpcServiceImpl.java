@@ -33,7 +33,7 @@ public class EventsGrpcServiceImpl {
                         .newBuilder()
                         .setAggregateId(Utils.GetUUID())
                         .setEventDate(Utils.GetDate())
-                        .setEventName(Constants.GET_FRIEND)
+                        .setEventName(Constants.GET_FRIENDS_LIST)
                         .setUserName(principal.getUsername())
                         .build());
         Flux<Event> eventFlux = reactorEventgRPCServiceStub.sendEvent(eventMono);

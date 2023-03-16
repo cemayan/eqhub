@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class EventsGrpcServiceImpl extends ReactorEventgRPCServiceGrpc.EventgRPCServiceImplBase {
 
+
     @Override
     public Flux<Event> sendEvent(Mono<Event> request) {
             return request.flux().doOnNext(System.out::println);

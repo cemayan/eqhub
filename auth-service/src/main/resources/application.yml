@@ -19,4 +19,4 @@ spring:
 eqhub:
   auth:
     secret: __secretkey&&__secretkey%%__secretkey//__
-    exp:  3600000
+    exp:  360000000

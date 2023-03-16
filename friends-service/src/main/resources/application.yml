@@ -1,7 +1,11 @@
 spring:
   application:
     name: local-grpc-server
-
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: password
 
 
 grpc:
@@ -9,3 +13,10 @@ grpc:
     port: 9898
 server:
   port: 8057
+
+
+
+eqhub:
+  auth:
+    secret: __secretkey&&__secretkey%%__secretkey//__
+    exp:  3600000
