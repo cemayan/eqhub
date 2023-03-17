@@ -1,10 +1,13 @@
 package org.dark.eqhub.friendsservice.domain.port.output;
 
 import org.dark.eqhub.friendsservice.domain.model.User;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
+@Component
 public interface Neo4jPort {
-    Flux<User> GetFriends();
-    Mono<User> AddRelationToUser(String userName, String targetUserName);
+    Flux<User> getFriends(String userName);
+
+    void addUser(String userName);
+    void addRelationToUser(String userName, String targetUserName);
 }

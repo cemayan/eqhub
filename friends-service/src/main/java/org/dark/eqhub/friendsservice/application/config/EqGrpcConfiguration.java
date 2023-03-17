@@ -11,12 +11,17 @@ import java.io.IOException;
 @Configuration
 public class EqGrpcConfiguration {
 
+    private final EventsGrpcServiceImpl eventsGrpcService;
+
+    public EqGrpcConfiguration(EventsGrpcServiceImpl eventsGrpcService) {
+        this.eventsGrpcService = eventsGrpcService;
+    }
 
 
     @PostConstruct
     public  void startGrpcServer() {
         Server server = ServerBuilder.forPort(9898)
-                .addService(new EventsGrpcServiceImpl()).build();
+                .addService(eventsGrpcService).build();
 
         try {
             server.start();

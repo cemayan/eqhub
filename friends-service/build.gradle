@@ -27,7 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
+    implementation 'org.springframework.boot:spring-boot-starter-data-neo4j:3.0.2'
     implementation "org.springframework.security:spring-security-core"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

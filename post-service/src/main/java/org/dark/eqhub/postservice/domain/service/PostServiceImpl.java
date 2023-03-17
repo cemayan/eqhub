@@ -16,7 +16,7 @@ public class PostServiceImpl implements PostUsecase {
     }
 
     @Override
-    public Mono<Post> CreatePost(Post post) {
+    public Mono<Post> createPost(Post post) {
         return mongoPort.CreatePost(post);
     }
 }

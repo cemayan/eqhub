@@ -49,7 +49,7 @@ public class PostController {
     public Mono<ResponseEntity<Response>> CreatePost(@RequestBody Post post) {
 
         try {
-            Mono<Post> response = postUsecase.CreatePost(post);
+            Mono<Post> response = postUsecase.createPost(post);
             return response.map(x -> ResponseEntity.ok().body(new Response(x)));
 
         } catch (Exception e) {
