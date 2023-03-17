@@ -16,11 +16,9 @@ message Event {
 }
 
 message Response {
-  string message = 1;
-  bytes data = 2;
-  int32  statusCode = 3;
+  bytes event_data = 2;
 }
 
 service EventgRPCService {
-  rpc SendEvent(Event) returns (stream Event) {}
+  rpc SendEvent(Event) returns (stream Response) {}
 }

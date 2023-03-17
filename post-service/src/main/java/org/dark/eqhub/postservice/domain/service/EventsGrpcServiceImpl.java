@@ -6,6 +6,7 @@ import org.dark.eqhub.common.Constants;
 import org.dark.eqhub.common.util.Utils;
 import org.dark.eqhub.proto.Event;
 import org.dark.eqhub.proto.ReactorEventgRPCServiceGrpc;
+import org.dark.eqhub.proto.Response;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class EventsGrpcServiceImpl {
                         .setEventName(Constants.GET_FRIENDS_LIST)
                         .setUserName(principal.getUsername())
                         .build());
-        Flux<Event> eventFlux = reactorEventgRPCServiceStub.sendEvent(eventMono);
+        Flux<Response> eventFlux = reactorEventgRPCServiceStub.sendEvent(eventMono);
         eventFlux.parallel().subscribe();
     }
 
