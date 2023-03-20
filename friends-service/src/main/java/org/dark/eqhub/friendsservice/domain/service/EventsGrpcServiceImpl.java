@@ -27,6 +27,7 @@ public class EventsGrpcServiceImpl extends ReactorEventgRPCServiceGrpc.EventgRPC
     @Override
     public Flux<Response> sendEvent(Mono<Event> request) {
 
+
       return    request.flatMapMany(event-> {
          return friendsUsecase.getFriends(event.getUserName()).flatMap(x-> {
 
@@ -36,8 +37,7 @@ public class EventsGrpcServiceImpl extends ReactorEventgRPCServiceGrpc.EventgRPC
                  return Flux.just(Response.newBuilder().setEventData(ByteString.copyFrom(bytes)).build());
              } catch (JsonProcessingException e) {
                  return Flux.just(Response.newBuilder().build());
-             }
-        });
+             }});
         });
 
     }

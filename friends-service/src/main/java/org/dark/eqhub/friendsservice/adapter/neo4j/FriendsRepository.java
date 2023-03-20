@@ -13,7 +13,7 @@ public interface FriendsRepository extends ReactiveNeo4jRepository<User, Long> {
 
     @Query("MATCH (user:User) <-[p:FOLLOWERS]- (target:User) "
             + "WHERE user.userName= $userName "
-            + "RETURN target")
+            + "RETURN target,p")
     Flux<User> findByFollowers(String userName);
 
 }

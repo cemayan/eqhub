@@ -2,7 +2,6 @@ package org.dark.eqhub.postservice.domain.service;
 
 
 import org.dark.eqhub.postservice.application.constants.Constants;
-import org.dark.eqhub.postservice.domain.model.Post;
 import org.dark.eqhub.postservice.domain.port.input.RedisUsecase;
 import org.dark.eqhub.postservice.domain.port.output.RedisPort;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class RedisServiceImpl implements RedisUsecase {
     }
 
     @Override
-    public Mono<Post> Get(String hashKey) {
+    public Mono<Object> Get(String hashKey) {
         return redisPort.get(Constants.CACHE_POSTS_KEY_NAME, hashKey);
     }
 }

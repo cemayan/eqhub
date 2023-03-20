@@ -32,7 +32,7 @@ public class PostController {
 
     @GetMapping("/test")
     public void sendEvent() {
-         eventsGrpcService.sendEvent();
+         eventsGrpcService.sendFriendListEvent().subscribe();
     }
 
 

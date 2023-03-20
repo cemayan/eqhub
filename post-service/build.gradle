@@ -28,6 +28,7 @@ dependencies {
     implementation project(':common')
     implementation project(':proto')
     implementation 'net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE'
+    runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.73.Final:osx-aarch_64")
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
