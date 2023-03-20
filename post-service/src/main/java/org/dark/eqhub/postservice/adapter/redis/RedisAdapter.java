@@ -1,11 +1,10 @@
 package org.dark.eqhub.postservice.adapter.redis;
 
 
+import org.dark.eqhub.postservice.domain.model.Post;
 import org.dark.eqhub.postservice.domain.port.output.RedisPort;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @Component
 public class RedisAdapter implements RedisPort {
@@ -18,13 +17,13 @@ public class RedisAdapter implements RedisPort {
     }
 
     @Override
-    public void Put(String key, String hashKey, Object data) {
+    public void put(String key, String hashKey, Object data) {
         Mono<Boolean> add = redisRepository.add(key, hashKey, data);
         add.subscribe();
     }
 
     @Override
-    public Optional<String> Get(String key) {
-        return Optional.empty();
+    public Mono<Post>  get(String key, String hashKey) {
+        return redisRepository.get(key,hashKey);
     }
 }

@@ -10,6 +10,19 @@ public class Post {
     private String id;
     private String name;
 
+
+    public Post() {
+    }
+
+    public Post(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Post(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

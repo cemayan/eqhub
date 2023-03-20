@@ -45,8 +45,16 @@ public class PostController {
         return Mono.just(new String[]{context.getAuthentication().getName()});
     }
 
+
+
+    @GetMapping(Constants.POST_CONTROLLER_GETBYID_PREFIX)
+    public Mono<ResponseEntity<Response>> getPost(@PathVariable String postId) {
+        return postUsecase.getPost(postId).map(x-> ResponseEntity.ok().body(new Response(x)));
+    }
+
+
     @PostMapping(Constants.POST_CONTROLLER_POST_PREFIX)
-    public Mono<ResponseEntity<Response>> CreatePost(@RequestBody Post post) {
+    public Mono<ResponseEntity<Response>> createPost(@RequestBody Post post) {
 
         try {
             Mono<Post> response = postUsecase.createPost(post);

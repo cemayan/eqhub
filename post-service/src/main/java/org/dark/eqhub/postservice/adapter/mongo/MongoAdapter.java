@@ -15,7 +15,12 @@ public class MongoAdapter implements MongoPort {
     }
 
     @Override
-    public Mono<Post> CreatePost(Post post) {
+    public Mono<Post> createPost(Post post) {
         return postRepository.save(post);
+    }
+
+    @Override
+    public Mono<Post> getPost(String postId) {
+        return postRepository.findById(postId);
     }
 }

@@ -30,7 +30,9 @@ public class RedisRepository {
         return this.reactiveRedisOperations.opsForHash().put(key, hashKey, post);
     }
 
-
+    public Mono<Post> get(String key, String hashKey){
+        return this.reactiveRedisOperations.opsForHash().get(key,hashKey).cast(Post.class);
+    }
 
 
     public Mono<Boolean> deleteAll(Long userId) {

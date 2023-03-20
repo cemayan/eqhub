@@ -1,11 +1,12 @@
 package org.dark.eqhub.postservice.domain.service;
 
 
+import org.dark.eqhub.postservice.application.constants.Constants;
+import org.dark.eqhub.postservice.domain.model.Post;
 import org.dark.eqhub.postservice.domain.port.input.RedisUsecase;
 import org.dark.eqhub.postservice.domain.port.output.RedisPort;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Service
 public class RedisServiceImpl implements RedisUsecase {
@@ -17,12 +18,12 @@ public class RedisServiceImpl implements RedisUsecase {
     }
 
     @Override
-    public void Put(String key, String hashKey, Object data) {
-        redisPort.Put(key,hashKey, data);
+    public void Put(String hashKey, Object data) {
+        redisPort.put(Constants.CACHE_POSTS_KEY_NAME,hashKey, data);
     }
 
     @Override
-    public Optional<String> Get(String key) {
-        return Optional.empty();
+    public Mono<Post> Get(String hashKey) {
+        return redisPort.get(Constants.CACHE_POSTS_KEY_NAME, hashKey);
     }
 }

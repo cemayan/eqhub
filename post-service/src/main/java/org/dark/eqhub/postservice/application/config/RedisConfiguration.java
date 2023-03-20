@@ -20,7 +20,15 @@ public class RedisConfiguration {
         RedisSerializationContext.RedisSerializationContextBuilder<String, Post> builder =
                 RedisSerializationContext.newSerializationContext(new StringRedisSerializer());
 
-        RedisSerializationContext<String, Post> context = builder.value(serializer).build();
+
+        RedisSerializationContext<String, Post> context = builder
+                .key(new StringRedisSerializer())
+                .hashKey(new StringRedisSerializer())
+                .hashValue(serializer)
+                .value(serializer)
+                .build();
+
+
 
         return new ReactiveRedisTemplate<>(factory, context);
     }

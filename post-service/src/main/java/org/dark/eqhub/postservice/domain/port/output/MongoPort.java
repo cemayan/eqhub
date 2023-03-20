@@ -5,5 +5,6 @@ import org.dark.eqhub.postservice.domain.model.Post;
 import reactor.core.publisher.Mono;
 
 public interface MongoPort {
-    Mono<Post> CreatePost(Post post);
+    Mono<Post> createPost(Post post);
+    Mono<Post> getPost(String postId);
 }

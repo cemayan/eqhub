@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 @Component
 public interface PostUsecase {
     Mono<Post> createPost(Post post);
+    Mono<Post> getPost(String postId);
 }
