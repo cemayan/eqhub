@@ -28,7 +28,7 @@ public class PostServiceImpl implements PostUsecase {
 
     @Override
     public Mono<Post> getPost(String postId) {
-        return redisPort.get(Constants.CACHE_POSTS_KEY_NAME, postId).switchIfEmpty(mongoPort.getPost(postId));
+        return redisPort.get(Constants.CACHE_POSTS_KEY_NAME, postId).switchIfEmpty(Mono.defer(() -> mongoPort.getPost(postId)));
     }
 }
 
