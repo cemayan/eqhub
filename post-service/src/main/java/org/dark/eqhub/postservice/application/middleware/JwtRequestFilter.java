@@ -40,6 +40,7 @@ public class JwtRequestFilter
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 context.setAuthentication(auth);
                 SecurityContextHolder.setContext(context);
+
             }
         }else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

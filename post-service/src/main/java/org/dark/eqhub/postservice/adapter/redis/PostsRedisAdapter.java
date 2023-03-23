@@ -1,24 +1,23 @@
 package org.dark.eqhub.postservice.adapter.redis;
 
 
-import org.dark.eqhub.postservice.domain.port.output.RedisPort;
+import org.dark.eqhub.postservice.domain.port.output.PostsRedisPort;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class RedisAdapter implements RedisPort {
+public class PostsRedisAdapter implements PostsRedisPort {
 
 
-    private final RedisRepository redisRepository;
+    private final PostsRedisRepository redisRepository;
 
-    public RedisAdapter(RedisRepository redisRepository) {
+    public PostsRedisAdapter(PostsRedisRepository redisRepository) {
         this.redisRepository = redisRepository;
     }
 
     @Override
     public void put(String key, String hashKey, Object data) {
-        Mono<Boolean> add = redisRepository.add(key, hashKey, data);
-        add.subscribe();
+        redisRepository.add(key, hashKey, data).subscribe();
     }
 
     @Override

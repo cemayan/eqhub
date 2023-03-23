@@ -3,16 +3,16 @@ package org.dark.eqhub.postservice.domain.service;
 
 import org.dark.eqhub.postservice.application.constants.Constants;
 import org.dark.eqhub.postservice.domain.port.input.RedisUsecase;
-import org.dark.eqhub.postservice.domain.port.output.RedisPort;
+import org.dark.eqhub.postservice.domain.port.output.PostsRedisPort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 public class RedisServiceImpl implements RedisUsecase {
 
-    private final RedisPort redisPort;
+    private final PostsRedisPort redisPort;
 
-    public RedisServiceImpl(RedisPort redisPort) {
+    public RedisServiceImpl(PostsRedisPort redisPort) {
         this.redisPort = redisPort;
     }
 

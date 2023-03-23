@@ -7,23 +7,23 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class RedisRepository {
+public class PostsRedisRepository {
     private final ReactiveRedisOperations<String, Post> reactiveRedisOperations;
 
-    public RedisRepository(ReactiveRedisOperations<String, Post> reactiveRedisOperations) {
+    public PostsRedisRepository(ReactiveRedisOperations<String, Post> reactiveRedisOperations) {
         this.reactiveRedisOperations = reactiveRedisOperations;
     }
 
-    public Flux<Post> findAll(Long userId){
-        return this.reactiveRedisOperations.opsForList().range(userId.toString(), 0, -1);
+    public Flux<Post> findAll(String userId){
+        return this.reactiveRedisOperations.opsForList().range(userId, 0, -1);
     }
 
-    public Mono<Post> findById(Long userId, String id) {
+    public Mono<Post> findById(String userId, String id) {
         return this.findAll(userId).filter(p -> p.getId().equals(id)).last();
     }
 
-    public Mono<Long> addToList(Long userId,Post post){
-        return this.reactiveRedisOperations.opsForList().rightPush(userId.toString(), post);
+    public Mono<Long> addToList(String userId,Post post){
+        return this.reactiveRedisOperations.opsForList().rightPush(userId, post);
     }
 
     public Mono<Boolean> add(String key, String hashKey, Object post){
@@ -35,7 +35,7 @@ public class RedisRepository {
     }
 
 
-    public Mono<Boolean> deleteAll(Long userId) {
-        return this.reactiveRedisOperations.opsForList().delete(userId.toString());
+    public Mono<Boolean> deleteAll(String userId) {
+        return this.reactiveRedisOperations.opsForList().delete(userId);
     }
 }

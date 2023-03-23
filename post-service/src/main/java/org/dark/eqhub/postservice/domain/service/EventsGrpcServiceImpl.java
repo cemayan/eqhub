@@ -20,6 +20,7 @@ public class EventsGrpcServiceImpl implements EventGrpcUsecase {
     private final ReactorEventgRPCServiceGrpc.ReactorEventgRPCServiceStub reactorEventgRPCServiceStub;
 
 
+
     public EventsGrpcServiceImpl(ReactorEventgRPCServiceGrpc.ReactorEventgRPCServiceStub reactorEventgRPCServiceStub) {
         this.reactorEventgRPCServiceStub = reactorEventgRPCServiceStub;
 
