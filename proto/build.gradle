@@ -13,10 +13,6 @@ plugins {
     id 'com.google.protobuf' version "${protobufPluginVersion}"
 }
 
-
-group 'org.dark.eqhub'
-version '1.0.0'
-
 repositories {
     mavenCentral()
 }

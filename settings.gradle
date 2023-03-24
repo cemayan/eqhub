@@ -1,9 +1,11 @@
 rootProject.name = 'eqhub'
 include 'auth-server'
 include 'common'
-include 'post-service'
+include ':post-service:read-api'
+include ':post-service:write-api'
 include 'login-service'
 include 'auth-service'
 include 'friends-service'
 include 'proto'
+include 'message-relayer'
 
