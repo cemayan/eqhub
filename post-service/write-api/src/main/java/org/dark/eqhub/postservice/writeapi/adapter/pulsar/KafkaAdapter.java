@@ -1,10 +1,10 @@
 package org.dark.eqhub.postservice.writeapi.adapter.pulsar;
 
 
-import org.dark.eqhub.postservice.writeapi.domain.port.output.PulsarPort;
+import org.dark.eqhub.postservice.writeapi.domain.port.output.KafkaPort;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PulsarAdapter implements PulsarPort {
+public class KafkaAdapter implements KafkaPort {
 
 }

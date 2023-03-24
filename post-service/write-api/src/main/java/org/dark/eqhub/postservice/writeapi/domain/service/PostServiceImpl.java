@@ -40,27 +40,25 @@ public class PostServiceImpl implements PostUsecase {
     }
 
     @Override
-    public void createOutboxEvent(Outbox outbox) {
-        mongoPort.createOutboxEvent(outbox).subscribe();
+    public void createOutboxEvent(Outbox outbox, String postId) {
+        mongoPort.createOutboxEvent(outbox).doOnNext(x-> {
+            eventGrpcUsecase.sendFriendListEvent().doOnNext(y -> {
+
+                try {
+                    User user = objectMapper.readValue(y.toByteArray(), User.class);
+                    feedsRedisPort.put(user.getUserName(),postId);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        });
     }
 
     @Override
     public Mono<Post> createPost(Post post) {
     return mongoPort.createPost(post).doOnNext(x-> {
-
-        createOutboxEvent(Utils.getNewPostCreatedEvent());
         postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME,x.getId(),x);
-
-        eventGrpcUsecase.sendFriendListEvent().doOnNext(y -> {
-
-            try {
-                User user = objectMapper.readValue(y.toByteArray(), User.class);
-                feedsRedisPort.put(user.getUserName(),x.getId());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
+        createOutboxEvent(Utils.getNewPostCreatedEvent(), x.getId());
     });
     }
 
