@@ -2,13 +2,15 @@ package org.dark.eqhub.postservice.writeapi.adapter.redis;
 
 
 import org.dark.eqhub.postservice.writeapi.domain.port.output.PostsRedisPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
 public class PostsRedisAdapter implements PostsRedisPort {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(PostsRedisAdapter.class);
     private final PostsRedisRepository redisRepository;
 
     public PostsRedisAdapter(PostsRedisRepository redisRepository) {
@@ -21,7 +23,7 @@ public class PostsRedisAdapter implements PostsRedisPort {
     }
 
     @Override
-    public Mono<Object>  get(String key, String hashKey) {
-        return redisRepository.get(key,hashKey);
+    public Mono<Object> get(String key, String hashKey) {
+        return redisRepository.get(key, hashKey);
     }
 }

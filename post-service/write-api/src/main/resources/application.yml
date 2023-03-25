@@ -3,6 +3,15 @@ spring:
     web-application-type: reactive
   webflux:
     base-path: '/api'
+  kafka:
+    consumer:
+      bootstrap-servers: "localhost:9092"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: "earliest"
+      properties:
+        spring.json.value.default.type: org.dark.eqhub.postservice.writeapi.domain.model
+
   data:
     redis:
       host: localhost

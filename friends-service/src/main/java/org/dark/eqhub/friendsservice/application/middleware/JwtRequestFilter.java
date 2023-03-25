@@ -2,6 +2,8 @@ package org.dark.eqhub.friendsservice.application.middleware;
 
 
 import org.dark.eqhub.common.jwt.JwtTokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,7 @@ public class JwtRequestFilter
         implements WebFilter {
 
     public static final String HEADER_PREFIX = "Bearer ";
-
+    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
@@ -41,7 +43,8 @@ public class JwtRequestFilter
                 context.setAuthentication(auth);
                 SecurityContextHolder.setContext(context);
             }
-        }else {
+        } else {
+            logger.error("Unauthorized!");
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
 
@@ -54,6 +57,7 @@ public class JwtRequestFilter
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(HEADER_PREFIX)) {
             return bearerToken.substring(7);
         }
+        logger.error("Bad token!");
         return null;
     }
 }

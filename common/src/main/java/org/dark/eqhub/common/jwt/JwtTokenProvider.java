@@ -25,9 +25,9 @@ import static java.util.stream.Collectors.joining;
 @Component
 public class JwtTokenProvider {
 
-    private static final String AUTHORITIES_KEY = "roles";
-    Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
+    private static final String AUTHORITIES_KEY = "roles";
 
     @Value("${eqhub.auth.secret}")
     private String secret;

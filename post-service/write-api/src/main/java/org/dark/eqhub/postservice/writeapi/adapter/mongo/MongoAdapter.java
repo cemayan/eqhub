@@ -3,11 +3,15 @@ package org.dark.eqhub.postservice.writeapi.adapter.mongo;
 import org.dark.eqhub.postservice.writeapi.domain.model.Outbox;
 import org.dark.eqhub.postservice.writeapi.domain.model.Post;
 import org.dark.eqhub.postservice.writeapi.domain.port.output.MongoPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
 public class MongoAdapter implements MongoPort {
+
+    private static final Logger logger = LoggerFactory.getLogger(MongoAdapter.class);
 
     private final PostRepository postRepository;
     private final OutboxRepository outboxRepository;

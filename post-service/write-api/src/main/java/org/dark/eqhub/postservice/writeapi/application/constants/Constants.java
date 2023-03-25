@@ -19,7 +19,5 @@ public class Constants {
     public static final String CACHE_POSTS_KEY_NAME = "posts";
     public static final String CACHE_FEEDS_KEY_NAME = "feeds";
 
-
-
-
+    public static final String KAFKA_TOPIC_NAME = "events";
 }

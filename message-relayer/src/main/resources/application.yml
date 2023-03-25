@@ -1,0 +1,14 @@
+server:
+  port: 8078
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: eqhub
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    bootstrap-servers: localhost:9092

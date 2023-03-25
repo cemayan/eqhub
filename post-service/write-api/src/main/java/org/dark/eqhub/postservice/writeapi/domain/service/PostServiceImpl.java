@@ -11,6 +11,8 @@ import org.dark.eqhub.postservice.writeapi.domain.port.input.PostUsecase;
 import org.dark.eqhub.postservice.writeapi.domain.port.output.FeedsRedisPort;
 import org.dark.eqhub.postservice.writeapi.domain.port.output.MongoPort;
 import org.dark.eqhub.postservice.writeapi.domain.port.output.PostsRedisPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -19,10 +21,10 @@ import java.io.IOException;
 @Service
 public class PostServiceImpl implements PostUsecase {
 
+    private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
     private final MongoPort mongoPort;
     private final PostsRedisPort postsRedisPort;
     private final FeedsRedisPort feedsRedisPort;
-
     private final EventGrpcUsecase eventGrpcUsecase;
     private final ObjectMapper objectMapper;
 
@@ -41,25 +43,29 @@ public class PostServiceImpl implements PostUsecase {
 
     @Override
     public void createOutboxEvent(Outbox outbox, String postId) {
-        mongoPort.createOutboxEvent(outbox).doOnNext(x-> {
+        mongoPort.createOutboxEvent(outbox).doOnNext(x -> {
+
+
             eventGrpcUsecase.sendFriendListEvent().doOnNext(y -> {
 
                 try {
                     User user = objectMapper.readValue(y.toByteArray(), User.class);
-                    feedsRedisPort.put(user.getUserName(),postId);
+                    feedsRedisPort.put(user.getUserName(), postId);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
+
+
         });
     }
 
     @Override
     public Mono<Post> createPost(Post post) {
-    return mongoPort.createPost(post).doOnNext(x-> {
-        postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME,x.getId(),x);
-        createOutboxEvent(Utils.getNewPostCreatedEvent(), x.getId());
-    });
+        return mongoPort.createPost(post).doOnNext(x -> {
+            postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME, x.getId(), x);
+            createOutboxEvent(Utils.getNewPostCreatedEvent(), x.getId());
+        });
     }
 
     @Override
@@ -69,7 +75,7 @@ public class PostServiceImpl implements PostUsecase {
                 .cast(Post.class)
                 .switchIfEmpty(
                         Mono.defer(() -> mongoPort.getPost(postId)
-                                .doOnNext(x->  postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME,x.getId(),x))));
+                                .doOnNext(x -> postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME, x.getId(), x))));
     }
 }
 

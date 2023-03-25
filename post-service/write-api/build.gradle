@@ -2,6 +2,8 @@ plugins {
     id 'org.springframework.boot' version '3.0.5'
 }
 
+
+
 dependencies {
     implementation project(':common')
     implementation project(':proto')
@@ -14,7 +16,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-test'
     implementation "org.springframework.security:spring-security-core"
-    implementation 'io.projectreactor.kafka:reactor-kafka:1.13.17'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'io.projectreactor.kafka:reactor-kafka'
     implementation 'org.projectlombok:lombok'
     implementation 'io.projectreactor:reactor-test'
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'

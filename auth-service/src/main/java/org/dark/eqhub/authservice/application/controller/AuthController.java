@@ -5,6 +5,8 @@ import org.dark.eqhub.authservice.adapter.UserRepository;
 import org.dark.eqhub.authservice.domain.model.AuthRequest;
 import org.dark.eqhub.common.jwt.JwtTokenProvider;
 import org.dark.eqhub.common.model.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final AuthenticationManager authenticationManager;
 
@@ -46,6 +50,7 @@ public class AuthController {
             model.put("token", token);
             return ResponseEntity.ok(new Response(model));
         } catch (Exception e) {
+            logger.error("Unauthorized user : {}", data.getUsername());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
