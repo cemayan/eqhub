@@ -9,6 +9,10 @@ import reactor.core.publisher.Mono;
 public interface PostUsecase {
 
     void createOutboxEvent(Outbox outbox, String id);
+
     Mono<Post> createPost(Post post);
+
     Mono<Post> getPost(String postId);
+
+    void consumeEvent();
 }

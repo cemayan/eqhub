@@ -8,6 +8,8 @@ spring:
       port: 27017
       database: eqhub
   kafka:
+    properties:
+      spring.json.add.type.headers: false
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
