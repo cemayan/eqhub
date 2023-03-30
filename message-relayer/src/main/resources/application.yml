@@ -9,6 +9,13 @@ spring:
       database: eqhub
   kafka:
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     bootstrap-servers: localhost:9092
+
+
+
+eqhub:
+  auth:
+    secret: __secretkey&&__secretkey%%__secretkey//__
+    exp:  3600000

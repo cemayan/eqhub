@@ -1,5 +1,6 @@
 package org.dark.eqhub.postservice.writeapi.domain.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dark.eqhub.common.model.User;
 import org.dark.eqhub.postservice.writeapi.application.constants.Constants;
@@ -57,14 +58,21 @@ public class PostServiceImpl implements PostUsecase {
             });
 
 
-        });
+        }).subscribe();
     }
 
     @Override
     public Mono<Post> createPost(Post post) {
         return mongoPort.createPost(post).doOnNext(x -> {
             postsRedisPort.put(Constants.CACHE_POSTS_KEY_NAME, x.getId(), x);
-            createOutboxEvent(Utils.getNewPostCreatedEvent(), x.getId());
+
+            try {
+                String s = objectMapper.writeValueAsString(post);
+                createOutboxEvent(Utils.getNewPostCreatedEvent(s), x.getId());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
         });
     }
 

@@ -1,9 +1,9 @@
-package com.dark.eqhub.messagerelayer.adapter.mongo;
+package org.dark.eqhub.messagerelayer.adapter.mongo;
 
 
-import com.dark.eqhub.messagerelayer.adapter.kafka.KafkaAdapter;
-import com.dark.eqhub.messagerelayer.domain.model.Outbox;
-import com.dark.eqhub.messagerelayer.domain.port.output.MongoPort;
+import org.dark.eqhub.messagerelayer.adapter.kafka.KafkaAdapter;
+import org.dark.eqhub.messagerelayer.domain.model.Outbox;
+import org.dark.eqhub.messagerelayer.domain.port.output.MongoPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,12 @@ public class MongoAdapter implements MongoPort {
     }
 
     @Override
+    public void removeOutboxEvent(String id) {
+        outboxRepository.deleteById(id).subscribe();
+    }
+
+    @Override
     public Flux<Outbox> getAllOutboxEvents() {
-        return null;
+        return outboxRepository.findAll();
     }
 }

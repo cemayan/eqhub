@@ -1,7 +1,7 @@
-package com.dark.eqhub.messagerelayer.application.config;
+package org.dark.eqhub.messagerelayer.application.config;
 
 
-import com.dark.eqhub.messagerelayer.domain.model.Outbox;
+import org.dark.eqhub.messagerelayer.domain.model.Outbox;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

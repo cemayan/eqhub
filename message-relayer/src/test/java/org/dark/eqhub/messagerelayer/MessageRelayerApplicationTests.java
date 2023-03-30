@@ -1,4 +1,4 @@
-package com.dark.eqhub.messagerelayer;
+package org.dark.eqhub.messagerelayer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

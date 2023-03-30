@@ -1,6 +1,6 @@
-package com.dark.eqhub.messagerelayer.domain.port.output;
+package org.dark.eqhub.messagerelayer.domain.port.output;
 
-import com.dark.eqhub.messagerelayer.domain.model.Outbox;
+import org.dark.eqhub.messagerelayer.domain.model.Outbox;
 import reactor.core.publisher.Mono;
 import reactor.kafka.sender.SenderResult;
 

@@ -1,9 +1,9 @@
-package com.dark.eqhub.messagerelayer.adapter.kafka;
+package org.dark.eqhub.messagerelayer.adapter.kafka;
 
 
-import com.dark.eqhub.messagerelayer.domain.model.Outbox;
-import com.dark.eqhub.messagerelayer.domain.port.output.KafkaPort;
 import org.dark.eqhub.common.Constants;
+import org.dark.eqhub.messagerelayer.domain.model.Outbox;
+import org.dark.eqhub.messagerelayer.domain.port.output.KafkaPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
